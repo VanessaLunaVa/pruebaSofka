@@ -1,0 +1,13 @@
+.layout-container {
+  height: 100vh;
+}
+
+.content {
+  padding: 20px;
+  min-height: calc(100vh - 128px);
+}
+
+.sidenav {
+  width: 220px;
+  background-color: #fafafa;
+}

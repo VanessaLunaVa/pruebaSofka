@@ -1,0 +1,72 @@
+<div class="transaction-form-container">
+    <div class="form-header">
+        <h2>Nueva Transacción</h2>
+    </div>
+
+    <!-- Mensajes de éxito/error -->
+    <div class="alert alert-success" *ngIf="submitSuccess()">
+        <mat-icon>check</mat-icon> {{ submitSuccess() }}
+    </div>
+
+    <div class="alert alert-error" *ngIf="submitError()">
+        <mat-icon>cancel</mat-icon>  {{ submitError() }}
+    </div>
+
+    <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+        <!-- Transacción -->
+        <div class="form-group">
+            <label for="client">
+                Cliente Transacción <span class="required">*</span>
+            </label>
+            <select id="client" formControlName="client" class="form-control" [class.is-invalid]="isFieldInvalid('client')">
+                <option *ngFor="let client of transactionClient" [value]="client.value">
+                    {{ client.label }}
+                </option>
+            </select>
+            <div class="error-message" *ngIf="isFieldInvalid('client')">
+                {{ getErrorMessage('client') }}
+            </div>
+        </div>
+
+        <!-- Monto y Moneda en la misma fila -->
+        <div class="form-group">
+            <label for="amount">
+                Monto <span class="required">*</span>
+            </label>
+            <input type="number" id="amount" formControlName="amount" class="form-control" style="width: 96%;"
+                [class.is-invalid]="isFieldInvalid('amount')" placeholder="0.00" step="0.01" min="1">
+            <div class="error-message" *ngIf="isFieldInvalid('amount')">
+                {{ getErrorMessage('amount') }}
+            </div>
+            <small class="help-text" *ngIf="!isFieldInvalid('amount')">
+                Monto entre $1.00 y $1,000,000.00
+            </small>
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+            <label for="description">
+                Descripción <span class="required">*</span>
+            </label>
+            <textarea id="description" formControlName="description" class="form-control"
+                [class.is-invalid]="isFieldInvalid('description')" rows="4" style="width: 96%;"
+                placeholder="Escriba una descripción de la transacción (mínimo 10 caracteres)"></textarea>
+            <div class="error-message" *ngIf="isFieldInvalid('description')">
+                {{ getErrorMessage('description') }}
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="onReset()" [disabled]="isSubmitting()">
+                <mat-icon>refresh</mat-icon> Limpiar
+            </button>
+
+            <button type="submit" class="btn btn-primary" [disabled]="isSubmitting()">
+                <span *ngIf="isSubmitting()" class="spinner"></span><mat-icon>save</mat-icon>
+                {{ isSubmitting() ? 'Creando...' : 'Crear Transacción' }}
+            </button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,9 @@
+<h2 class="logo">Mi Prueba</h2>
+
+<mat-nav-list>
+    <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+    </a>
+</mat-nav-list>

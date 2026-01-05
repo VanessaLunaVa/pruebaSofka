@@ -1,0 +1,72 @@
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <h1 class="title">Transacciones</h1>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total Transacciones</div>
+      <div class="stat-value">{{ totals().count }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Monto Total</div>
+      <div class="stat-value">{{ formatCurrency(totals().monto) }}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Comisión Total</div>
+      <div class="stat-value">{{ formatCurrency(totals().commission) }}</div>
+    </div>
+    <div class="stat-card highlight">
+      <div class="stat-label">Total General</div>
+      <div class="stat-value">{{ formatCurrency(totals().total) }}</div>
+    </div>
+  </div>
+
+  <!-- Table Card -->
+  <div class="table-card">
+    <div class="table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> ID Cliente </th>
+            <th> ID Transacción </th>
+            <th> Monto </th>
+            <th> Comisión </th>
+            <th> Total </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (trx of transactions(); track trx.id) {
+            <tr>
+              <td>
+                <span class="badge badge-blue">{{ trx.clientId }}</span>
+              </td>
+              <td>
+                <span class="badge badge-purple">{{ trx.id }}</span>
+              </td>
+              <td class="text-right amount">{{ formatCurrency(trx.monto) }}</td>
+              <td class="text-right amount-secondary">{{ formatCurrency(trx.commission) }}</td>
+              <td class="text-right amount-total">{{ formatCurrency(trx.total) }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="5" class="empty-state">
+                <div class="empty-content">
+                  <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                  <p>No se encontraron transacciones</p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

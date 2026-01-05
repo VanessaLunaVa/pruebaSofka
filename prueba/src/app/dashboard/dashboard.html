@@ -1,0 +1,24 @@
+<mat-sidenav-container class="layout-container">
+
+  <!-- Menú lateral izquierdo -->
+  <mat-sidenav mode="side" opened class="sidenav">
+    <app-menu></app-menu>
+  </mat-sidenav>
+
+  <!-- Contenido principal -->
+  <mat-sidenav-content>
+    <!-- Banner superior -->
+    <app-header></app-header>
+    <!-- Contenido -->
+    <div class="content">
+      <mat-card>
+        <mat-card-content>
+          <router-outlet />
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- Pie de página -->
+    <app-footer></app-footer>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
