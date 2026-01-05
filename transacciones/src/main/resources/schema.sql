@@ -1,0 +1,18 @@
+-- Borrar tabla si existe
+DROP TABLE IF EXISTS TRANSACCION;
+
+-- Crear tabla
+CREATE TABLE TRANSACCION (
+    ID BIGINT NOT NULL AUTO_INCREMENT,
+    CLIENTE_ID BIGINT NOT NULL,
+    FECHA TIMESTAMP NOT NULL,
+    MONTO DECIMAL(18,2) NOT NULL,
+    COMISION DECIMAL(18,2) NOT NULL,
+    TOTAL DECIMAL(18,2) NOT NULL,
+    DESCRIPTION VARCHAR(300) NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+-- Crear índice
+CREATE INDEX idx_transaccion_cliente ON transaccion(cliente_id);
+CREATE INDEX idx_transaccion_fecha ON transaccion(fecha);
